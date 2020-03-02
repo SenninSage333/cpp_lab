@@ -1,4 +1,5 @@
 #include<iostream>
+#include<iomanip>
 using namespace std;
 
 int work(int v);
@@ -17,7 +18,11 @@ int main(){
  cout << e << " size:" << sizeof(e) << endl;
  cout << f << " size:" << sizeof(f) << endl;
  cout << work(a) << ' ' << work(5) << ' ' << work(0) << endl;
- return 0;
+
+ int t1 = 22;
+ int t2 = 7;
+ std::cout << std::fixed << std::setprecision(2) << "a/b: " << t1/t2 << endl; 
+return 0;
 }
 
 int work(int v) {
