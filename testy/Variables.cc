@@ -1,6 +1,8 @@
 #include<iostream>
 using namespace std;
 
+int work(int v);
+
 int main(){
  int a = 2;
  float b = 3.14;
@@ -14,5 +16,14 @@ int main(){
  cout << d << " size:" << sizeof(d) << endl;
  cout << e << " size:" << sizeof(e) << endl;
  cout << f << " size:" << sizeof(f) << endl;
+ cout << work(a) << ' ' << work(5) << ' ' << work(0) << endl;
  return 0;
+}
+
+int work(int v) {
+ static int first = 0;
+ first++;
+ if(!v)
+	return first;
+ return v;
 }
