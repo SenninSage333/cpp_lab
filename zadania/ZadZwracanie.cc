@@ -22,10 +22,16 @@ int* tablica(){
 }
 
 int main(){
+    cout << "Wartossc" << endl;
     cout << wartosc() << endl;
+    cout << "Wskaznik" << endl;
     cout << *wskaznik() << endl;
+    cout << "Referencja" << endl;
     cout << referencja(2) << endl;
-    cout << *tablica() << endl;
+    cout << "Tablica" << endl;
+    for(int i = 0; i<3; i++){
+        cout << i << "\t" << tablica()[i] << endl;
+    }
 
     return 0;
 }
