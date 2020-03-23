@@ -27,16 +27,13 @@ extern "C"{
 
 int main(int argc, char *argv[]){
     for(int i = 1; i < argc; i++){
-        if(*argv[i] == '1'){
-            a();
-        } else if(*argv[i] == '2'){
-            b();
-        } else if(*argv[i] == '3'){
-            c();
-        } else if(*argv[i] == '4'){
-            cout << ca() << endl;
-        } else if(*argv[i] == '5'){
-            cout << cb() << endl;
+        switch(*argv[i]){
+            case '1': a(); break;
+            case '2': b(); break;
+            case '3': c(); break;
+            case '4': cout << ca() << endl; break;
+            case '5': cout << cb() << endl; break;
+            default: cout << "There is no such function" << endl;
         }
     }
 }
