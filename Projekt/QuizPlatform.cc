@@ -29,21 +29,20 @@ class MainScreen
 {
 public:
     MainScreen() { show(); };
-    friend class QuizA;
+    friend class Quiz;
 
 private:
     void show();
-    void initQuizA();
-    void initQuizB();
+    void initQuiz(int quiz, string chosen);
     void results(int score);
 };
 
-class QuizA
+class Quiz
 {
 public:
-    QuizA()
+    Quiz(int quiz)
     {
-        pick();
+        pick(quiz);
         score = 0;
     };
     friend class MainScreen;
@@ -53,13 +52,14 @@ private:
     string questions[20];
     string answers[20];
     char correct[20];
-    void pick();
-    void start();
+    void pick(int quiz);
+    int start(string chosen);
     void ask(int i);
 };
 
 void MainScreen::show()
 {
+    system("CLS");
     int q;
     cout << "Welcome!!!" << endl;
     cout << "Choose a quiz: " << endl;
@@ -70,7 +70,11 @@ void MainScreen::show()
     {
     case 0:
         system("CLS");
-        initQuizA();
+        initQuiz(0, "C++");
+        break;
+    case 1:
+        system("CLS");
+        initQuiz(1, "JAVA");
         break;
     default:
         cout << "There is no such quiz" << endl;
@@ -82,60 +86,98 @@ void MainScreen::show()
     }
 }
 
-void MainScreen::initQuizA()
+void MainScreen::initQuiz(int quiz, string chosen)
 {
-    QuizA A;
-    A.start();
+    Quiz A(quiz);
+    results(A.start(chosen));
+    //A.pick(quiz);
+    return show();
 }
 
 void MainScreen::results(int score)
 {
+    system("CLS");
     cout << "Your score: " << score << " / " << 20 << endl;
-    cout << "Percentage: " << score / 20 << endl;
+    cout << "Percentage: " << (score / 20.0) * 100 << endl;
+    cout << endl;
+    cout << "Press any key to show main screen." << endl;
+    getch();
 }
 
-void QuizA::pick()
+void Quiz::pick(int quiz)
 {
-    ifstream q("questionsA.txt");
-    ifstream a("answersA.txt");
-    ifstream c("correctA.txt");
+    ifstream q;
+    ifstream a;
+    ifstream c;
+    switch (quiz)
+    {
+    case 0:
+        //ifstream q("questionsA.txt");
+        //ifstream a("answersA.txt");
+        //ifstream c("correctA.txt");
+        q.open("questionsA.txt");
+        a.open("answersA.txt");
+        c.open("correctA.txt");
+        break;
+    case 1:
+        //ifstream q("questionsA.txt");
+        //ifstream a("answersA.txt");
+        //ifstream c("correctA.txt");
+        q.open("questionsB.txt");
+        a.open("answersB.txt");
+        c.open("correctB.txt");
+        break;
+    }
     if (q.is_open() && a.is_open() && c.is_open())
     {
         vector<int> numbers = randoms(20, 25);
         string line;
         int i = 0;
-        int t = 0;
+        int t;
         while (getline(q, line))
         {
             if (count(numbers.begin(), numbers.end(), i))
             {
+                for (t = 0; t < 20; t++)
+                {
+                    if (numbers[t] == i)
+                        break;
+                }
                 questions[t] = line;
-                t++;
             }
             i++;
         }
         q.close();
         i = 0;
-        t = 0;
-        while(getline(a, line)){
+        while (getline(a, line))
+        {
             if (count(numbers.begin(), numbers.end(), i))
             {
+                for (t = 0; t < 20; t++)
+                {
+                    if (numbers[t] == i)
+                        break;
+                }
                 answers[t] = line;
-                t++;
             }
             i++;
         }
         a.close();
         i = 0;
-        t = 0;
         char l;
-        while(!c.eof()){
+        while (!c.eof())
+        {
             c.get(l);
-            if(l == '\n') continue;
+            if (l == '\n')
+                continue;
             if (count(numbers.begin(), numbers.end(), i))
             {
+                for (t = 0; t < 20; t++)
+                {
+                    if (numbers[t] == i)
+                        break;
+                }
                 correct[t] = l;
-                t++;
             }
             i++;
         }
@@ -147,39 +189,58 @@ void QuizA::pick()
     }
 }
 
-void QuizA::start()
+int Quiz::start(string chosen)
 {
     system("CLS");
-    cout << "You have choosen C++ Quiz\n";
+    cout << "You have chosen " << chosen << " Quiz\n";
     cout << "You will be asked 20 questions.\n";
-    cout << "Every question has only one correct answer";
+    cout << "Every question has only one correct answer\n";
     cout << "For every correct answer you get 1 point.\n";
     cout << "To pass this quiz you have to gain at least 10 points.\n";
     cout << "Good luck!\n\n";
     cout << "Press any key to start\n";
     getch();
     ask(0);
+    return score;
 }
 
-void QuizA::ask(int i){
-    if(i == 20){
+void Quiz::ask(int i)
+{
+    if (i == 20)
+    {
         return;
     }
     system("CLS");
     char a = 'A';
     char answer;
-    cout << questions[i] << "\n";
-    cout << answers[i] << "\n\n";
+    cout << questions[i] << "\n\n";
+    int temp = 0;
+    int pos;
+    while (true)
+    {
+        pos = answers[i].substr(temp).find("|");
+        if (pos == string::npos)
+        {
+            cout << (char)a << ". " << answers[i].substr(temp) << "\n\n";
+            break;
+        }
+        cout << (char)a << ". " << answers[i].substr(temp, pos) << "\n\n";
+        temp += pos + 1;
+        a += 1;
+    }
+    cin.clear();
+    fflush(stdin);
     cin >> answer;
-    if(answer == correct[i] || (char)(answer-32) == correct[i]) {
+    if (answer == correct[i] || (char)(answer - 32) == correct[i])
+    {
         score += 1;
     }
-    ask(i+1);
+    ask(i + 1);
 }
 
 int main(int argc, char *argv[])
 {
-    srand(time(NULL));
+    srand(time(0));
     MainScreen M;
     return 0;
 }
