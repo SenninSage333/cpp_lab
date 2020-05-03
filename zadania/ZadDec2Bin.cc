@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-void binToDec(int number){
+void decToBin(int number){
     int t = 0, tab[32];
     while(number){
         tab[t] = number % 2;
@@ -18,7 +18,7 @@ int main(){
     cout << "Podaj liczbe: " << endl;
     cin >> number;
     cout << "Podana liczba w systemie binarnym wynosi: " << endl;
-    binToDec(number);
+    decToBin(number);
     cout << endl;
 
     return 0;

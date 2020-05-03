@@ -2,7 +2,7 @@
 #include<cmath>
 using namespace std;
 
-int decToBin(int number){
+int binToDec(int number){
     int result = 0, i = 0, temp;
 
     while (number != 0){
@@ -20,6 +20,6 @@ int main(){
     cout << "Podaj liczbe w systemie binarnym: " << endl;
     cin >> number;
     cout << "Podana liczba w systemie dziesietnym wynosi: " << endl;
-    cout << decToBin(number) << endl;
+    cout << binToDec(number) << endl;
     return 0;
 }
