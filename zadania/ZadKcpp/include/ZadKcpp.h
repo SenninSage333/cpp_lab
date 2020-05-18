@@ -1,7 +1,6 @@
 #ifndef ZAD_KCPP_H
 #define ZAD_KCPP_H
 #include <iostream>
-#include <string>
 using namespace std;
 
 class ZadKcpp {
@@ -25,15 +24,6 @@ public:
     void priorytetyOperatorow();
     void decToBin(int number);
     int binToDec(int number);
-    void passArray(int *tab, unsigned int s);
-    void writeToFile(char* filename, string text);
-    void readFromfile(char* filename);
-    void cAndCpp();
-    void parzyste(int x);
-    int znajdz(int x, int tab[], int roz);
-    void petle();
-    int znajdzString(string s, string tab[]);
-    void showSwitch();
 };
 
 int tab[] = {1, 2, 3, 4, 5};
