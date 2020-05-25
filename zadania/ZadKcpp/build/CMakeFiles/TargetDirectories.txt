@@ -1,0 +1,3 @@
+X:/cpp/cpp_lab/zadania/ZadKcpp/build/CMakeFiles/edit_cache.dir
+X:/cpp/cpp_lab/zadania/ZadKcpp/build/CMakeFiles/main.dir
+X:/cpp/cpp_lab/zadania/ZadKcpp/build/CMakeFiles/rebuild_cache.dir

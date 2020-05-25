@@ -26,8 +26,8 @@ public:
     void decToBin(int number);
     int binToDec(int number);
     void passArray(int *tab, unsigned int s);
-    void writeToFile(char* filename, string text);
-    void readFromfile(char* filename);
+    void writeToFile(string filename, string text);
+    void readFromfile(string filename);
     void cAndCpp();
     void parzyste(int x);
     int znajdz(int x, int tab[], int roz);

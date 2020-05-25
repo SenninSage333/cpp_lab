@@ -374,11 +374,12 @@ void ZadKcpp::passArray(int *tab, unsigned int s)
     }
 }
 
-void ZadKcpp::writeToFile(char *filename, string text)
+void ZadKcpp::writeToFile(string filename, string text)
 {
+    const char* name = filename.c_str();
     cout << "Append to file: " << text << endl;
     ofstream file;
-    file.open(filename, ios_base::app);
+    file.open(name, ios_base::app);
     if (file.is_open())
     {
         file << text << "\n";
@@ -388,7 +389,7 @@ void ZadKcpp::writeToFile(char *filename, string text)
         cout << "Error" << endl;
 }
 
-void ZadKcpp::readFromfile(char *filename)
+void ZadKcpp::readFromfile(string filename)
 {
     cout << endl
          << "Reading from file" << endl
@@ -396,7 +397,8 @@ void ZadKcpp::readFromfile(char *filename)
     ;
     ifstream rfile;
     string line;
-    rfile.open(filename);
+    const char* name = filename.c_str();
+    rfile.open(name);
     if (rfile.is_open())
     {
         while (getline(rfile, line))
