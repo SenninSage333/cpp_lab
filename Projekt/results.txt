@@ -1,0 +1,6 @@
+Student: Tomasz Jamrozik 320316
+Test: JAVA
+Score: 8/25
+Date: Fri May 29 12:55:00 2020
+
+
