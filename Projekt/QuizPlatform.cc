@@ -89,6 +89,8 @@ void MainScreen::show()
     cout << "2: C++ Test\n\n";
     cout << "3: JAVA Test\n\n";
     cout << "\n\n4: Exit\n\n";
+    cin.clear();
+    fflush(stdin);
     cin >> q;
     switch (q)
     {
